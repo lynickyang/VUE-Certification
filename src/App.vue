@@ -1,5 +1,6 @@
 <script setup>
 import { items } from "./movies.json";
+import "bootstrap-icons/font/bootstrap-icons.scss";
 /*
  This is an Icon that you can use to represent the stars if you like
  otherwise you could just use a simple ⭐️ emoji, or * character.
@@ -31,18 +32,13 @@ import { items } from "./movies.json";
               {{ item.description }}
             </p>
           </div>
-          <div class="card-footer border-0 ">
-            <div class="row">
-              <div class="col-4">
-                <p class="card-text">Rationg:{{item.rating}}/5</p>
-              </div>
-              <div class="col-8 ">
+          <div class="card-footer border-0 bg-light">
+            <div class="row d-inline">
+                <p class="card-text d-inline">Rationg:{{item.rating}}/5</p>
                 <div v-for="i in item.rating" :key="{i}" class="row d-inline">
-                  <div class="d-inline">*</div>
+                  <div class="d-inline"><i class="bi bi-star-fill text-warning "></i></div>
                 </div>
-              </div>
-            </div>
-            
+              </div> 
           </div>
         </div>
       </div>
