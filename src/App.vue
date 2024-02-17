@@ -31,8 +31,18 @@ import { items } from "./movies.json";
               {{ item.description }}
             </p>
           </div>
-          <div class="card-footer">
-            <p class="card-text">Rationg:{{item.rating}}/5</p>
+          <div class="card-footer border-0 ">
+            <div class="row">
+              <div class="col-4">
+                <p class="card-text">Rationg:{{item.rating}}/5</p>
+              </div>
+              <div class="col-8 ">
+                <div v-for="i in item.rating" :key="{i}" class="row d-inline">
+                  <div class="d-inline">*</div>
+                </div>
+              </div>
+            </div>
+            
           </div>
         </div>
       </div>
