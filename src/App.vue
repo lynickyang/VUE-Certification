@@ -24,8 +24,8 @@ import { items } from "./movies.json";
             </p>
           </div>
           <div class="card-body word-height pt-0">
-            <div v-for="genres in item.genres" :key="index" class="card-text d-inline">
-              <span class="badge rounded-pill text-bg-primary mr-2">{{ genres }}</span>
+            <div v-for="genres in item.genres" :key="index" class="card-text d-inline ">
+              <span class="badge rounded-pill text-bg-primary mx-1">{{ genres }}</span>
             </div>
             <p class="card-text mt-3">
               {{ item.description }}
