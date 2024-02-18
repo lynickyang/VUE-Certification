@@ -23,7 +23,12 @@ function getStartNumber(index,i){
   <div class="container">
     <div class="row row-cols-3 my-4">
       <div v-for="( item,index ) in movies" :key="item.id" class="col">
-        <div class="card">
+        <div class="card position-relative">
+          <div class="position-absolute top-0 end-0 p-1 mx-2">
+            <i class="bi bi-star-fill  fs-1" :class="item.rating >=1 ?'text-warning':''"></i>
+          </div>
+          <div class="z-3 position-absolute top-0 end-0 fs-5 mx-4 my-3"><span>{{item.rating}}</span></div>
+
           <img
             :src="item.image"
             class="card-img-top img-cover"
@@ -46,8 +51,8 @@ function getStartNumber(index,i){
             <div class="row d-inline">
                 <p class="card-text d-inline">Rationg:{{item.rating}}/5</p>
                 <div class="d-inline">
-                  <button v-for="i in 5" :key="{i}" >
-                    <div class="d-inline" 
+                  <button type="button" v-for="i in 5" :key="{i}" class="border-0" >
+                    <div class="d-inline "  
                     :class="i<= item.rating? 'text-warning': ''"
                     @click="getStartNumber(index,i)"
                     >
