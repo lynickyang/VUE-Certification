@@ -32,11 +32,11 @@ import "bootstrap-icons/font/bootstrap-icons.scss";
               {{ item.description }}
             </p>
           </div>
-          <div class="card-footer border-0 bg-light">
+          <div class="card-footer border-0 ">
             <div class="row d-inline">
                 <p class="card-text d-inline">Rationg:{{item.rating}}/5</p>
-                <div v-for="i in item.rating" :key="{i}" class="row d-inline">
-                  <div class="d-inline"><i class="bi bi-star-fill text-warning "></i></div>
+                <div v-for="i in 5" :key="{i}" class="row d-inline">
+                  <div class="d-inline" :class="i<= item.rating? 'text-warning': ''"><i class="bi bi-star-fill "></i></div>
                 </div>
               </div> 
           </div>
