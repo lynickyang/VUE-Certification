@@ -9,6 +9,16 @@ const myModal = ref(null);
 
 const movies = ref(items);
 
+const addMovie={
+  id:"",
+  name:"",
+  description:"",
+  iamge:"",
+  rating:0,
+  genres:[],
+  inTheaters:false,
+}
+
 function getStartNumber(index, i) {
   movies.value[index].rating = i;
 }
@@ -40,43 +50,107 @@ const myModal_hide = () => {
 <template>
   <!-- This is where your template goes -->
   <div class="container">
-
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary"  @click="myModal_show()">
+    <button type="button" class="btn btn-primary" @click="myModal_show()">
       Launch static backdrop modal
     </button>
 
     <!-- Modal -->
     <div class="modal fade" tabindex="-1" ref="modal">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" >新增電影</h5>
-            <button  type="button" class="btn-close" aria-label="Close" @click="myModal_hide"></button>
+            <h5 class="modal-title">新增電影</h5>
+            <button
+              type="button"
+              class="btn-close"
+              aria-label="Close"
+              @click="myModal_hide"
+            ></button>
           </div>
           <div class="modal-body">
-            表單放這裡
-            <form>
+            <form class="row g-3">
               <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <label for="name" class="form-label">電影名稱</label>
+                <input  type="text" class="form-control" id="name" />
+
               </div>
+
               <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="description" class="form-label">影片描述</label>
+                <textarea
+                  class="form-control"
+                  id="description"
+                  rows="3"
+                ></textarea>
               </div>
-              <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+
+              <div class="mb-3">
+                <label for="image" class="form-label">照片上傳</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="image"
+                  aria-describedby="imagehelp"
+                />
+                <div id="imagehelp" class="form-text">請輸入圖片的網址</div>
               </div>
+              <div class="col-md-4">
+                <label for="rating" class="form-label">評分（1-5）</label>
+                <select id="rating" class="form-select form-select-sm" aria-label="Small select example">
+                  <option selected disabled>評分</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-check-label" >電影類型</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Action" id="Action">
+                  <label class="form-check-label" for="Action">Action</label>
+                </div>
+
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Crime" id="Crime">
+                  <label class="form-check-label" for="Crime">Crime</label>
+                </div>
+
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Drama" id="Drama">
+                  <label class="form-check-label" for="Drama">Drama</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-check-label" >院線片嗎</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="inTheaters" id="inTheaters">
+                  <label class="form-check-label" for="inTheaters">
+                    已經上映
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="inTheaters" id="NotinTheaters" checked>
+                  <label class="form-check-label" for="NotinTheaters">
+                    即將上映
+                  </label>
+                </div>
+              </div>
+
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-
           </div>
 
           <div class="modal-footer">
-            <button type="button"  class="btn btn-secondary" @click="myModal_hide" >
+            <button
+              type="button"
+              class="btn btn-secondary"
+              @click="myModal_hide"
+            >
               Close
             </button>
             <button type="button" class="btn btn-primary">新增</button>
