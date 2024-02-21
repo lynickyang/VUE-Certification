@@ -6,39 +6,60 @@ import Modal from "bootstrap/js/dist/modal";
 
 const modal = ref(null);
 const myModal = ref(null);
-
 const movies = ref(items);
 
-const addMovie={
-  id:"",
+const newData = ref({
   name:"",
-  description:"",
-  iamge:"",
+  description:'',
+  image:'',
   rating:0,
   genres:[],
   inTheaters:false,
 }
+)
+
+const cleanForm =()=>{
+  newData.value.name="",
+  newData.value.description="",
+  newData.value.image="",
+  newData.value.rating=0,
+  newData.value.genres=[],
+  newData.value.inTheaters=false
+}
+
+const submitForm =()=>{
+  // console.log("submit click")
+  // console.log(newData.value)
+  let pushData= {
+    id:new Date().valueOf(),
+    name:newData.value.name,
+    description:newData.value.description,
+    image:newData.value.image,
+    rating:newData.value.rating,
+    genres:newData.value.genres,
+    inTheaters:newData.value.inTheaters,
+  }
+  // console.log(pushData)
+  movies.value.push(pushData)
+  cleanForm();
+  myModal_hide();
+}
+
 
 function getStartNumber(index, i) {
   movies.value[index].rating = i;
 }
 
-const hideModal = () => {
-  myModal.value.hide();
-};
-const toggleModal = () => {
-  myModal.value.show();
-};
 
 onMounted(() => {
   myModal.value = new Modal(modal.value);
-});
-const myModal_show = () => {
-  myModal.value.show();
-};
+  });
+  const myModal_show = () => {
+    myModal.value.show();
+  };
 
-const myModal_hide = () => {
-  myModal.value.hide();
+  const myModal_hide = () => {
+    myModal.value.hide();
 };
 /*
  This is an Icon that you can use to represent the stars if you like
@@ -52,7 +73,7 @@ const myModal_hide = () => {
   <div class="container">
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" @click="myModal_show()">
-      Launch static backdrop modal
+      新增電影資料
     </button>
 
     <!-- Modal -->
@@ -69,35 +90,39 @@ const myModal_hide = () => {
             ></button>
           </div>
           <div class="modal-body">
-            <form class="row g-3">
+            <form  class="row g-3">
+              <!-- <form @submit.prevent="submitForm" class="row g-3"></form> -->
               <div class="mb-3">
                 <label for="name" class="form-label">電影名稱</label>
-                <input  type="text" class="form-control" id="name" />
-
+                <input  v-model="newData.name" type="text" class="form-control" id="name" />
+                {{ newData.name }}
               </div>
 
               <div class="mb-3">
                 <label for="description" class="form-label">影片描述</label>
                 <textarea
+                  v-model="newData.description"
                   class="form-control"
                   id="description"
                   rows="3"
                 ></textarea>
+                {{ newData.description }}
               </div>
 
               <div class="mb-3">
                 <label for="image" class="form-label">照片上傳</label>
                 <input
+                  v-model="newData.image"
                   type="text"
                   class="form-control"
                   id="image"
                   aria-describedby="imagehelp"
                 />
-                <div id="imagehelp" class="form-text">請輸入圖片的網址</div>
+                <div id="imagehelp" class="form-text">請輸入圖片的網址{{ newData.image }}</div>
               </div>
               <div class="col-md-4">
                 <label for="rating" class="form-label">評分（1-5）</label>
-                <select id="rating" class="form-select form-select-sm" aria-label="Small select example">
+                <select v-model="newData.rating" id="rating" class="form-select form-select-sm" aria-label="Small select example">
                   <option selected disabled>評分</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -105,43 +130,37 @@ const myModal_hide = () => {
                   <option value="4">4</option>
                   <option value="5">5</option>
                 </select>
+                <p>{{ newData.rating }}</p>
               </div>
 
               <div class="col-md-4">
                 <label class="form-check-label" >電影類型</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Action" id="Action">
+                  <input v-model="newData.genres" class="form-check-input" type="checkbox" value="Action" id="Action">
                   <label class="form-check-label" for="Action">Action</label>
                 </div>
 
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Crime" id="Crime">
+                  <input v-model="newData.genres" class="form-check-input" type="checkbox" value="Crime" id="Crime">
                   <label class="form-check-label" for="Crime">Crime</label>
                 </div>
 
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Drama" id="Drama">
+                  <input v-model="newData.genres" class="form-check-input" type="checkbox" value="Drama" id="Drama">
                   <label class="form-check-label" for="Drama">Drama</label>
                 </div>
+                {{ newData.genres }}
               </div>
 
               <div class="col-md-4">
-                <label class="form-check-label" >院線片嗎</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="inTheaters" id="inTheaters">
-                  <label class="form-check-label" for="inTheaters">
-                    已經上映
-                  </label>
+                  <input v-model="newData.inTheaters" class="form-check-input" type="checkbox" value="Drama" id="Drama">
+                  <label class="form-check-label" for="Drama">已上映</label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="inTheaters" id="NotinTheaters" checked>
-                  <label class="form-check-label" for="NotinTheaters">
-                    即將上映
-                  </label>
-                </div>
+                {{ newData.inTheaters }}
               </div>
 
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
             </form>
           </div>
 
@@ -150,10 +169,10 @@ const myModal_hide = () => {
               type="button"
               class="btn btn-secondary"
               @click="myModal_hide"
-            >
-              Close
+            >Close
             </button>
-            <button type="button" class="btn btn-primary">新增</button>
+            <button @click="cleanForm" type="button" class="btn btn-primary">清除</button>
+            <button @click="submitForm" type="submit" class="btn btn-primary">新增</button>
           </div>
         </div>
       </div>
