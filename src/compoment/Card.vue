@@ -1,11 +1,12 @@
 <script setup>
 
-defineProps(['movies','num'])
-const emit = defineEmits(['up-data']);
+defineProps(['movies'])
+defineEmits(['up-data']);
+// const emit = defineEmits(['up-data']);
 
-const upDateStart=(index,i)=>{
-  emit('up-data',index,i );
-}
+// const upDateStart=(index,i)=>{
+//   emit('up-data',index,i );
+// }
 
 // function upDateStart(index,i){
 //   console.log("觸發點及index是",index);
@@ -15,7 +16,6 @@ const upDateStart=(index,i)=>{
 </script>
 
 <template>
-  <p>num:{{ num }}</p>
   <div class="row row-cols-3 my-4">
     <div v-for="(item, index) in movies" :key="item.id" class="col">
       <div class="card position-relative">
@@ -58,7 +58,7 @@ const upDateStart=(index,i)=>{
                 v-for="i in 5"
                 :key="{ i }"
                 class="border-0"
-                @click="upDateStart(index,i)"
+                @click="$emit('up-data',index,i );"
               >
                 <div
                   class="d-inline"

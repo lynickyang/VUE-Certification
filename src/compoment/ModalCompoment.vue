@@ -2,7 +2,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import * as bootstrap from 'bootstrap'
-
+const emit = defineEmits(['push-data']);
 
 const modal = ref(null);
 const myModal = ref(null);
@@ -51,7 +51,8 @@ const submitForm =()=>{
     inTheaters:newData.value.inTheaters,
   }
   // console.log(pushData)
-  movies.value.push(pushData)
+  emit('push-data',pushData)
+  //movies.value.push(pushData)
   cleanForm();
   myModal_hide();
 }
