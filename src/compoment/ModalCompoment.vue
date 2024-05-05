@@ -3,6 +3,7 @@
 import { ref, onMounted } from "vue";
 import * as bootstrap from 'bootstrap'
 const emit = defineEmits(['push-data']);
+defineProps['editData']
 
 const modal = ref(null);
 const myModal = ref(null);

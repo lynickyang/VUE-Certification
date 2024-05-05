@@ -1,7 +1,7 @@
 <script setup>
-
+import editModol from './Modalcompoment.vue'
 defineProps(['movies'])
-defineEmits(['up-data']);
+defineEmits(['up-data','remove-data']);
 // const emit = defineEmits(['up-data']);
 
 // const upDateStart=(index,i)=>{
@@ -67,6 +67,10 @@ defineEmits(['up-data']);
                   <i class="bi bi-star-fill"></i>
                 </div>
               </button>
+              <button type="button" class="btn btn-primary" @click="$emit('remove-data',index )">移除</button>
+
+              <button type="button" class="btn btn-primary" @click="$emit('edit-data',index )">修改</button>
+              <editModol/>
             </div>
           </div>
         </div>
